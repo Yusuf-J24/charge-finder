@@ -18,7 +18,6 @@ ChargeFinder is a web-based application designed to help users find EV charging 
 - MySQL
 - HTML
 - CSS
-- JavaScript (optional)
 
 ## Project Status
-Currently under development as an MCA mini project.
+Currently under development.
