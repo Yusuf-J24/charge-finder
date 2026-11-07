@@ -48,5 +48,3 @@ Before making changes, please read the [Git & GitHub Setup Guide](documentation/
 ## Project Status
 
 **Currently under development.**
-
-This project is being developed as part of our MCA academic coursework.
