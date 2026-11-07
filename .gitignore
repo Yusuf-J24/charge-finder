@@ -7,3 +7,6 @@ __pycache__/
 
 # Environment variables and secrets
 .env
+
+# Ignore my personal Git workflow guide
+documentation/MY_GIT_WORKFLOW.md
