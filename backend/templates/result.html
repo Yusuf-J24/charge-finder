@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% if error %}
+        <p>{{error}}</p>
+    {% endif %}
+    {% if station_name %}
+        <p>Station Name: {{ station_name }}</p>
+        <p>Area: {{ area }}</p>
+        <p>Connector Type: {{connector_type}}</p>
+    {% endif %}
+        
+</body>
+</html>

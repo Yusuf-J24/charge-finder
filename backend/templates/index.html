@@ -6,39 +6,36 @@
     <title>ChargeFinder</title>
 </head>
 <body>
-    <header>
-        <h1>ChargeFinder</h1>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="#">About</a></li>
-            </ul>
-        </nav>
-    </header>
-    <hr>
-    <main>
-        <section>
-            <h2>Find EV Charging Stations</h2>
-            <p>
-                Discover charging stations and help the EV community
-                by reporting missing locations.
-            </p>
-            <input type="text" placeholder="Search charging stations...">
-        </section>
-        <section>
-            <h2>Explore Charging Stations</h2>
-            <p>Charging station listings will appear here.</p>
-            <h2>Station information coming soon</h2>
-            <p>
-                This section will display approved charging stations.
-            </p>
-        </section>
-    </main>
-    <hr>
-    <footer>
-        <p style="text-align: center;">
-            ChargeFinder · Currently under development
-        </p>
-    </footer>
+
+    <h1>ChargeFinder</h1>
+
+    <h2>Submit a Charging Station</h2>
+
+    <form action="/submit" method="POST">
+
+        <label>Station Name:</label>
+        <input type="text" name="station_name">
+
+        <br><br>
+
+        <label>Area:</label>
+        <input type="text" name="area">
+
+        <br><br>
+
+        <label>Connector Type:</label>
+        <select name="connector_type">
+            <option value="">Select Connector</option>
+            <option value="CCS2">CCS2</option>
+            <option value="Type 2">Type 2</option>
+            <option value="CHAdeMO">CHAdeMO</option>
+        </select>
+
+        <br><br>
+
+        <button type="submit">Submit Station</button>
+
+    </form>
+
 </body>
 </html>
