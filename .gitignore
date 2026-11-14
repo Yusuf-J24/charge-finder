@@ -1,12 +1,20 @@
-# Python virtual environment
-venv/
-
-# Python cache files
+# Python
 __pycache__/
-*.py[cod]
+*.pyc
 
-# Environment variables and secrets
+# Virtual environment
+venv/
+.venv/
+
+# Environment variables (passwords and secrets)
 .env
+
+# VS Code
+.vscode/
+
+# System files
+.DS_Store
+Thumbs.db
 
 # Ignore my personal Git workflow guide
 documentation/MY_GIT_WORKFLOW.md

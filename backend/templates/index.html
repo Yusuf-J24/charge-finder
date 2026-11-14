@@ -35,7 +35,19 @@
 
         <button type="submit">Submit Station</button>
 
-    </form>
+    </form><br>
+
+    <hr>
+
+        {% if results %}
+        {% for station in results %}
+            <p><strong>Station Name:</strong> {{station[1]}}</p> 
+            <p><strong>Area:</strong> {{station[2]}}</p>
+            <p><strong>Connector Type:</strong> {{station[3]}}</p> 
+        {% endfor %}
+    {% else %}
+        <p>No Approved Station</p>
+    {% endif %}
 
 </body>
 </html>
