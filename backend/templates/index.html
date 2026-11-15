@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ChargeFinder</title>
 </head>
+
 <body>
 
     <h1>ChargeFinder</h1>
@@ -38,16 +40,22 @@
     </form><br>
 
     <hr>
+    <h2>Charging Station Details</h2>
+    <form action="/" method="GET">
+        <input type="text" name="search_station">
+        <button type="submit">Search</button>
+    </form>
 
-        {% if results %}
+    {% if results %}
         {% for station in results %}
-            <p><strong>Station Name:</strong> {{station[1]}}</p> 
+            <p><strong>Station Name:</strong> {{station[1]}}</p>
             <p><strong>Area:</strong> {{station[2]}}</p>
-            <p><strong>Connector Type:</strong> {{station[3]}}</p> 
+            <p><strong>Connector Type:</strong> {{station[3]}}</p>
         {% endfor %}
     {% else %}
-        <p>No Approved Station</p>
+        <p>No matching stations found.</p>
     {% endif %}
 
 </body>
+
 </html>

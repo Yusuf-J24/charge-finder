@@ -5,20 +5,35 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    connection1 = get_db_connection()
-    cursor1 = connection1.cursor()
-
-    query = "SELECT * FROM stations WHERE status='Approved'"
-
-    cursor1.execute(query)
-
-    results = cursor1.fetchall()
-    cursor1.close()
-    connection1.close()
-
-
-    return render_template("index.html", results=results)
-
+    connection = None
+    cursor = None
+    search_station = request.args.get("search_station","").strip()
+    try:
+        connection = get_db_connection()
+        cursor = connection.cursor()
+        if search_station:
+            query = """
+            SELECT * FROM stations
+            WHERE status = %s
+            AND station_name LIKE %s
+            """
+            values = ("Approved", f"%{search_station}%")
+            cursor.execute(query, values)
+            results = cursor.fetchall()
+            return render_template("index.html", results=results)
+        else:
+            query = "SELECT * FROM stations WHERE status='Approved'"    
+            cursor.execute(query)
+            results = cursor.fetchall()
+            return render_template("index.html", results=results)
+    except Exception as e:
+        print("Database Error", e)
+        return "Something went wrong. Please try again later.", 500
+    finally:
+        if cursor:
+            cursor.close()
+        if connection:
+            connection.close()
 
 @app.route("/submit", methods=["POST"])
 def submit_station():
@@ -33,25 +48,27 @@ def submit_station():
     elif not connector_type:
         return render_template("result.html", error="Enter connector name!")
     else:
-        connection = get_db_connection()
-        cursor = connection.cursor()
-
-        query = """
-        INSERT INTO stations (station_name, area, connector_type)
-        VALUES (%s, %s, %s)
-        """
-    
-        values = (station_name, area, connector_type)
-
-        cursor.execute(query, values)
-        connection.commit()
-
-        cursor.close()
-        connection.close()
-        return render_template("result.html", message="Data Saved Successfully")
-
-
-        
+        connection = None
+        cursor = None
+        try:
+            connection = get_db_connection()
+            cursor = connection.cursor()
+            query = """
+            INSERT INTO stations (station_name, area, connector_type)
+            VALUES (%s, %s, %s)
+            """
+            values = (station_name, area, connector_type)
+            cursor.execute(query, values)
+            connection.commit()
+            return render_template("result.html", message="Data Saved Successfully")
+        except Exception as e:
+            print("Database Error", e)
+            return "Something went wrong. Please try again later.", 500
+        finally:
+            if cursor:
+                cursor.close()
+            if connection:
+                connection.close()
 
 if __name__ == "__main__":
     app.run(debug=True)
