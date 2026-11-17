@@ -8,7 +8,11 @@
 </head>
 
 <body>
-
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% for category, message in messages %}
+    <p>{{ message }}</p>
+    {% endfor %}
+    {% endwith %}
     <h1>ChargeFinder</h1>
 
     <h2>Submit a Charging Station</h2>
@@ -47,15 +51,18 @@
     </form>
 
     {% if results %}
-        {% for station in results %}
-            <p><strong>Station Name:</strong> {{station[1]}}</p>
-            <p><strong>Area:</strong> {{station[2]}}</p>
-            <p><strong>Connector Type:</strong> {{station[3]}}</p>
-        {% endfor %}
+    {% for station in results %}
+    <p><strong>Station Name:</strong> {{station[1]}}</p>
+    <p><strong>Area:</strong> {{station[2]}}</p>
+    <p><strong>Connector Type:</strong> {{station[3]}}</p>
+    {% endfor %}
     {% else %}
-        <p>No matching stations found.</p>
+    <p>No matching stations found.</p>
     {% endif %}
 
+    <a href="/admin">
+        <button>Admin Page</button>
+    </a>
 </body>
 
 </html>

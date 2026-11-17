@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChargeFinder - Admin</title>
+</head>
+
+<body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% for category, message in messages %}
+    <p>{{ message }}</p>
+    {% endfor %}
+    {% endwith %}
+    <table>
+        <tr>
+            <th>Station Name</th>
+            <th>Area</th>
+            <th>Connector</th>
+            <th>Status</th>
+            <th>Operation</th>
+        </tr>
+        {%if results%}
+        {%for station in results%}
+        <tr>
+            <td>{{station[1]}}</td>
+            <td>{{station[2]}}</td>
+            <td>{{station[3]}}</td>
+            <td>{{station[4]}}</td>
+            <td>
+                {%if station[4]=='Pending'%}
+                <form action="/reject" method="POST">
+                    <input type="hidden" name="station_id" value="{{station[0]}}">
+                    <button type="submit">Reject</button>
+                </form>
+                <form action="/approve" method="POST">
+                    <input type="hidden" name="station_id" value="{{station[0]}}">
+                    <button type="submit">Approve</button>
+                </form>
+                {%else%}
+                No Action Required
+                {%endif%}
+            </td>
+        </tr>
+        {%endfor%}
+        {%else%}
+        <tr>
+            <td colspan="5">No Stations Exist.</td>
+        </tr>
+        {%endif%}
+    </table>
+</body>
+
+</html>
